@@ -8,7 +8,7 @@ use Firebase\JWT\JWT;
 use FreeElephants\Jwt\Exception\InvalidArgumentException;
 use FreeElephants\Jwt\Exception\OutOfBoundsException;
 
-class FirebaseJwtDecoderAdapter implements JwtDecoderAdapterInterface
+class FirebaseJwtDecoder implements JwtDecoderInterface
 {
 
     private $algorithms;
