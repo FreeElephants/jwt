@@ -4,3 +4,8 @@
 ```bash
 composer install
 ```
+
+## Testing
+```bash
+vendor/bin/phpunit
+```
