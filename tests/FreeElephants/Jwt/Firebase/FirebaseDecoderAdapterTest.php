@@ -1,39 +1,41 @@
 <?php
 
 
-namespace FreeElephants\Jwt;
+namespace FreeElephants\Jwt\Firebase;
 
 
 use FreeElephants\Jwt\Exception\InvalidArgumentException;
 use FreeElephants\Jwt\Exception\OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
 
-class FirebaseJwtAdapterTest extends TestCase
+class FirebaseDecoderAdapterTest extends TestCase
 {
+
+    const EXAMPLE_JWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoaWQiOiJqb2UiLCJhdXRocm9sZXMiOlsic3Vic2NyaWJlciJdfQ.Lxyy1H3gfs1FV5UJLGxfAYvS1TJeiJhVInu5GIlccg4';
 
     public function testDecode()
     {
-        $decoder = new FirebaseJwtDecoder('example_key', ['HS256', 'HS384']);
+        $decoder = new FirebaseDecoderAdapter('example_key', ['HS256', 'HS384']);
 
-        $signature = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoaWQiOiJqb2UiLCJhdXRocm9sZXMiOlsic3Vic2NyaWJlciJdfQ.Lxyy1H3gfs1FV5UJLGxfAYvS1TJeiJhVInu5GIlccg4';
         $expected = new \stdClass();
         $expected->authid = 'joe';
         $expected->authroles = [
             'subscriber'
         ];
 
-        $this->assertEquals($expected, $decoder->decode($signature));
+        $this->assertEquals($expected, $decoder->decode(self::EXAMPLE_JWT));
     }
 
     public function testUseEmptyAllowedAlgorithmsListInvalidArgumentException()
     {
         $this->expectException(InvalidArgumentException::class);
-        new FirebaseJwtDecoder('example_key', []);
+        new FirebaseDecoderAdapter('example_key', []);
     }
 
     public function testSetAllowedAlgorithmsOutOfBoundsException()
     {
         $this->expectException(OutOfBoundsException::class);
-        new FirebaseJwtDecoder('example_key', ['foo bar']);
+        new FirebaseDecoderAdapter('example_key', ['foo bar']);
     }
+
 }

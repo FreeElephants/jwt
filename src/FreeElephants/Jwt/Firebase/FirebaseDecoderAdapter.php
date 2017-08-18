@@ -1,14 +1,16 @@
 <?php
 
 
-namespace FreeElephants\Jwt;
+namespace FreeElephants\Jwt\Firebase;
 
 
 use Firebase\JWT\JWT;
 use FreeElephants\Jwt\Exception\InvalidArgumentException;
 use FreeElephants\Jwt\Exception\OutOfBoundsException;
+use FreeElephants\Jwt\DecoderInterface;
+use FreeElephants\Jwt\EncoderInterface;
 
-class FirebaseJwtDecoder implements JwtDecoderInterface
+class FirebaseDecoderAdapter implements DecoderInterface, EncoderInterface
 {
 
     private $algorithms;
@@ -54,5 +56,14 @@ class FirebaseJwtDecoder implements JwtDecoderInterface
             'HS512',
             'RS256'
         ];
+    }
+
+    /**
+     * @param array|object $token
+     * @return string
+     */
+    public function encode($token, string $algorithm): string
+    {
+        return Jwt::encode($token, $this->key, $algorithm);
     }
 }

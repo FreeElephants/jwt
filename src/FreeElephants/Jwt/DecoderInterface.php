@@ -4,7 +4,7 @@
 namespace FreeElephants\Jwt;
 
 
-interface JwtDecoderInterface
+interface DecoderInterface
 {
 
     public function getAlgorithms(): array;
