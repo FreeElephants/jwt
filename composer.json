@@ -1,0 +1,26 @@
+{
+    "name": "free-elephants/jwt",
+    "type": "project",
+    "require": {
+        "firebase/php-jwt": "^5.0"
+    },
+    "authors": [
+        {
+            "name": "samizdam",
+            "email": "samizdam@inbox.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FreeElephants\\Jwt\\": "src/FreeElephants/Jwt/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "FreeElephants\\Jwt\\": "tests/FreeElephants/Jwt/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3"
+    }
+}

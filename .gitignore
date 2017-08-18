@@ -1,0 +1,6 @@
+/.idea/
+/tests/
+/var/
+/vendor/
+
+phpunit.xml
